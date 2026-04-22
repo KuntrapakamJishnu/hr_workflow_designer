@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Space+Grotesk:wght@500;700&display=swap');
+
+:root {
+  --bg: #f4f1e8;
+  --panel: #fffdf8;
+  --ink: #1b1f28;
+  --muted: #5f6677;
+  --line: #dfd7c2;
+  --accent: #14655a;
+  --accent-2: #f19f4d;
+  --danger: #ac3a37;
+  --shadow: 0 18px 40px rgba(20, 34, 56, 0.1);
+}
+
+body[data-theme='ocean'] {
+  --bg: #e8f2f8;
+  --panel: #f8fcff;
+  --ink: #10233a;
+  --muted: #4d627a;
+  --line: #c7d6e7;
+  --accent: #126d98;
+  --accent-2: #48a8c9;
+  --danger: #a63a47;
+  --shadow: 0 18px 40px rgba(14, 46, 79, 0.12);
+}
+
+body[data-theme='executive'] {
+  --bg: #eef0ef;
+  --panel: #fdfefc;
+  --ink: #1f2724;
+  --muted: #5f6963;
+  --line: #cfd5d1;
+  --accent: #2f6653;
+  --accent-2: #bb8a4f;
+  --danger: #9a3a2e;
+  --shadow: 0 18px 40px rgba(21, 35, 28, 0.12);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Manrope', sans-serif;
+  color: var(--ink);
+  background: radial-gradient(circle at 12% 18%, #fffaf0, transparent 45%),
+    radial-gradient(circle at 90% 0%, #d8f0e7, transparent 35%), var(--bg);
+}
+
+body[data-theme='ocean'] {
+  background: radial-gradient(circle at 10% 12%, #e8f8ff, transparent 44%),
+    radial-gradient(circle at 95% 0%, #d8ebff, transparent 36%), var(--bg);
+}
+
+body[data-theme='executive'] {
+  background: radial-gradient(circle at 13% 18%, #f9f6ef, transparent 46%),
+    radial-gradient(circle at 90% 0%, #e3eee8, transparent 35%), var(--bg);
+}
+
+#root {
+  min-height: 100vh;
+}
