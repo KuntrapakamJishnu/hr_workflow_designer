@@ -62,7 +62,7 @@ A modular React + React Flow prototype for visually building and testing HR work
 
 ## Project Structure
 
-```text
+```bash
 src/
   api/
     client.ts               # Fetch wrappers for /automations and /simulate
