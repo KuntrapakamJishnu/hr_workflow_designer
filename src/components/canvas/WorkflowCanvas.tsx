@@ -27,6 +27,7 @@ type WorkflowCanvasProps = {
   onNodeSelect: (nodeId: string | null) => void
   onEdgeSelect: (edgeId: string | null) => void
   onAddNode: (type: NodeType, position: XYPosition) => void
+  highlightedNodeId?: string | null
 }
 
 const nodeTypes = {
@@ -43,6 +44,7 @@ export const WorkflowCanvas = ({
   onNodeSelect,
   onEdgeSelect,
   onAddNode,
+  highlightedNodeId,
 }: WorkflowCanvasProps) => {
   const { screenToFlowPosition } = useReactFlow()
   const [dropBursts, setDropBursts] = useState<Array<{ id: number; x: number; y: number }>>([])
@@ -77,6 +79,14 @@ export const WorkflowCanvas = ({
       }
     })
   }, [edges])
+
+  const displayNodes = useMemo(() => {
+    return nodes.map((node) => ({
+      ...node,
+      selected: node.id === highlightedNodeId,
+      className: highlightedNodeId === node.id ? 'highlighted-node' : '',
+    }))
+  }, [nodes, highlightedNodeId])
 
   const onDrop = useCallback(
     (event: DragEvent) => {
@@ -164,7 +174,7 @@ export const WorkflowCanvas = ({
       ))}
 
       <ReactFlow
-        nodes={nodes}
+        nodes={displayNodes}
         edges={displayEdges}
         nodeTypes={nodeTypes}
         onNodesChange={onNodesChange}

@@ -91,6 +91,7 @@ function App() {
   })
   const [isShortcutOpen, setIsShortcutOpen] = useState(false)
   const [tourStep, setTourStep] = useState(0)
+  const [highlightedNodeId, setHighlightedNodeId] = useState<string | null>(null)
 
   useEffect(() => {
     document.body.setAttribute('data-theme', theme)
@@ -197,23 +198,23 @@ function App() {
         <header className="app-header">
           <div className="header-row">
             <div>
-              <h1>HR Workflow Designer</h1>
-              <p>Design onboarding, leave, and compliance workflows with configurable steps.</p>
+              <h1>✨ HR Workflow Designer</h1>
+              <p>Build sophisticated HR processes with visual workflow design. Test scenarios, validate logic, and simulate real-world execution paths.</p>
               <div className="header-stats">
-                <span className="header-chip">Nodes: {stats.nodes}</span>
-                <span className="header-chip">Edges: {stats.edges}</span>
-                <span className="header-chip">Conditional Paths: {stats.conditionalEdges}</span>
+                <span className="header-chip">🟢 Nodes: {stats.nodes}</span>
+                <span className="header-chip">🔗 Edges: {stats.edges}</span>
+                <span className="header-chip">⚙️ Paths: {stats.conditionalEdges}</span>
                 <span className={`header-chip ${stats.errorsCount > 0 ? 'error' : 'ok'}`}>
-                  Errors: {stats.errorsCount}
+                  {stats.errorsCount > 0 ? '❌' : '✅'} Errors: {stats.errorsCount}
                 </span>
                 <span className={`header-chip ${stats.warningsCount > 0 ? 'warning' : 'ok'}`}>
-                  Warnings: {stats.warningsCount}
+                  {stats.warningsCount > 0 ? '⚠️' : '✓'} Warnings: {stats.warningsCount}
                 </span>
               </div>
             </div>
             <div className="toolbar-row">
               <label className="theme-picker" aria-label="Theme selector">
-                <span>Theme</span>
+                <span>🎨 Theme</span>
                 <select
                   value={theme}
                   onChange={(event) => setTheme(event.target.value as AppTheme)}
@@ -224,19 +225,19 @@ function App() {
                 </select>
               </label>
               <button type="button" className="small-btn" onClick={handleExport}>
-                Export JSON
+                📥 Export JSON
               </button>
               <button type="button" className="small-btn" onClick={handleImportClick}>
-                Import JSON
+                📤 Import JSON
               </button>
               <button type="button" className="small-btn" onClick={() => setNotice(null)}>
-                Clear Notice
+                ✕ Clear Notice
               </button>
               <button type="button" className="small-btn" onClick={openTour}>
-                Start Tour
+                🎯 Start Tour
               </button>
               <button type="button" className="small-btn" onClick={() => setIsShortcutOpen(true)}>
-                Shortcuts
+                ⌨️ Shortcuts
               </button>
               <input
                 ref={importInputRef}
@@ -265,6 +266,7 @@ function App() {
             onNodeSelect={selectNode}
             onEdgeSelect={selectEdge}
             onAddNode={addNode}
+            highlightedNodeId={highlightedNodeId}
           />
 
           <div className="right-rail">
@@ -284,6 +286,7 @@ function App() {
               nodes={nodes}
               edges={edges}
               validationIssues={validationIssues}
+              onHighlightedNodeChange={setHighlightedNodeId}
             />
           </div>
         </section>
